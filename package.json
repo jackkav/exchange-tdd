@@ -1,0 +1,15 @@
+{
+  "name": "forty-three",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsc greeter.ts",
+    "pretest": "tsc",
+    "test": "alsatian ./specs/spec.js"
+  },
+  "devDependencies": {
+    "alsatian": "^1.3.1",
+    "typescript": "^2.2.2"
+  }
+}
