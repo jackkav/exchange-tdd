@@ -1,8 +1,18 @@
 {
   "compilerOptions": {
+    "module": "commonjs",
     "experimentalDecorators": true,
+    "noImplicitAny": false,
     "lib": [
       "es2015"
-    ]
-  }
+    ],
+    "outDir": "dist"
+  },
+  "include": [
+    "src/**/*",
+    "specs/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
