@@ -1,3 +1,5 @@
-test('adds 1 + 2 to equal 3', () => {
-  expect(sum(1, 2)).toBe(3);
+import { greeter } from '../src/greeter'
+
+test('says hello', () => {
+  expect(greeter({ firstName: 'a', lastName: 'b' })).toBe('Hello, a b');
 });

@@ -1,7 +1,12 @@
-function greeter(person) {
-  return "Hello, " + person;
+interface Person {
+  firstName: string;
+  lastName: string;
 }
 
-var user = "Jane User";
+export const greeter = (person: Person) => {
+  return "Hello, " + person.firstName + " " + person.lastName;
+}
 
-// document.body.innerHTML = greeter(user);
+
+var user = { firstName: 'Bob', lastName: 'Ross' };
+console.log(greeter(user))

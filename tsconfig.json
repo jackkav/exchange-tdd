@@ -1,18 +1,22 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES5",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
     "experimentalDecorators": true,
-    "noImplicitAny": false,
     "lib": [
       "es2015"
     ],
     "outDir": "dist"
   },
   "include": [
-    "src/**/*",
-    "specs/**/*"
+    "src/**/*"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "specs/**/*"
   ]
 }

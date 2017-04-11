@@ -4,8 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "tsc greeter.ts",
-    "test": "jest"
+    "prestart": "tsc",
+    "start": "node dist/greeter.js",
+    "test": "jest",
+    "watch": "jest --watch"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
