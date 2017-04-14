@@ -1,5 +1,7 @@
-import { roman2decimal } from '../src/roman'
+import { roman2decimal, decimal2roman } from '../src/roman'
 const exampleNumberals = {
+  I: 1,
+  V: 5,
   MMMCCXC: 3290,
   MCMVII: 1907,
   MMCDXLVII: 2447,
@@ -19,9 +21,14 @@ const exampleNumberals = {
   DCLI: 651,
 }
 
-test('numberals match values', () => {
+test('roman numerals match arabic numbers', () => {
   Object.keys(exampleNumberals).forEach(element => {
     expect(roman2decimal(element)).toEqual(exampleNumberals[element]);
   });
+});
 
+test('arabic numbers match roman numerals', () => {
+  Object.keys(exampleNumberals).forEach(element => {
+    expect(decimal2roman(exampleNumberals[element])).toEqual(element);
+  });
 });

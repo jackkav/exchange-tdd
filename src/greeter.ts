@@ -1,13 +1,12 @@
 // TODO: debugging
 
-
 interface Person {
   firstName: string;
   lastName: string;
 }
 
 export const greeter = (person: Person) => {
-  return "Hello, " + person.firstName + " " + person.lastName;
+  return "Hello, " + person.firstName + " " + person.lastName
 }
 
 

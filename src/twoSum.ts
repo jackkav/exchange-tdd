@@ -1,6 +1,6 @@
-export const twoSum = (nums: Array<number>, target: number): Array<number> => {
+export const twoSum = (nums: number[], target: number): number[] => {
   if (target == null) return []
-  let result: Array<number> = []
+  let result: number[] = []
   nums.forEach((element, index) => {
     if (element === target) result.push(index)
     nums.forEach((e, i) => {
