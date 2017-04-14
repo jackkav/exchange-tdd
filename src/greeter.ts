@@ -1,14 +1,13 @@
 // TODO: debugging
 
-interface Person {
+interface IPerson {
   firstName: string;
   lastName: string;
 }
 
-export const greeter = (person: Person) => {
-  return "Hello, " + person.firstName + " " + person.lastName
-}
+export const greeter = (person: IPerson) => {
+  return "Hello, " + person.firstName + " " + person.lastName;
+};
 
-
-var user = { firstName: 'Bob', lastName: 'Ross' };
-console.log(greeter(user))
+const user = { firstName: "Bob", lastName: "Ross" };
+// console.log(greeter(user));
