@@ -24,14 +24,11 @@ class QuKuanJi {
   public howMuch(s: string): number {
     let right = s.split(" is ")[1];
     right = right.substring(0, right.length - 1);
-    const a = right.split(" ").reduce((e, i) => {
-      // console.log("x", e, i);
-      return roman2decimal(this.whatIs("a") + this.whatIs("b"));
-    });
-
-    // const right
-
-    return a;
+    const roman = right.split(" ")
+      .map((x) => (x && this.whatIs(x)))
+      .toString()
+      .replace(/,/g, "");
+    return roman2decimal(roman);
   }
   public ask(s: string) {
     return "I have no idea.";
@@ -59,7 +56,7 @@ describe("Given training data", () => {
   describe("When I ask how much", () => {
     test("Then is should provide it", () => {
       expect(classUnderTest.howMuch("how much is a b ?")).toEqual(4);
-      // expect(classUnderTest.howMuch("how much is b a ?")).toEqual(6);
+      expect(classUnderTest.howMuch("how much is b a ?")).toEqual(6);
     });
   });
 });
