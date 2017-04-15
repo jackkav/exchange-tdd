@@ -1,5 +1,9 @@
-// TODO: debugging
-
+class Student {
+  public fullName: string;
+  constructor(public firstName: string, public middleInitial: string, public lastName: string) {
+    this.fullName = firstName + " " + middleInitial + " " + lastName;
+  }
+}
 interface IPerson {
   firstName: string;
   lastName: string;
@@ -8,6 +12,6 @@ interface IPerson {
 export const greeter = (person: IPerson) => {
   return "Hello, " + person.firstName + " " + person.lastName;
 };
-
-const user = { firstName: "Bob", lastName: "Ross" };
+const user = new Student("Jane", "M.", "User");
+// const user = { firstName: "Bob", lastName: "Ross" };
 // console.log(greeter(user));

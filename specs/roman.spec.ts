@@ -20,7 +20,10 @@ const exampleNumberals = {
   MMD: 2500,
   DCLI: 651,
 };
+test("roman numerals handles null", () => {
+  expect(roman2decimal(null)).toEqual(0);
 
+});
 test("roman numerals match arabic numbers", () => {
   Object.keys(exampleNumberals).forEach((element) => {
     expect(roman2decimal(element)).toEqual(exampleNumberals[element]);

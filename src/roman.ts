@@ -24,6 +24,7 @@ export const decimal2roman = (num: number): string => {
 };
 
 export const roman2decimal = (s: string): number => {
+  if (!s) { return 0; }
   s = s.toUpperCase();
   let dec = 0;
 
