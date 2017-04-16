@@ -17,9 +17,12 @@ interface IMineralValue {
   value: number;
 }
 export class QuKuanJi {
-  public localCurrency: string = "simoleans";
+  public localCurrency: string;
   private romanList: INumeralAssignment[] = [];
   private mineralList: IMineralValue[] = [];
+  constructor(localCurrency: string = 'simoleans') {
+    this.localCurrency = localCurrency;
+  }
 
   public trainRoman(s: string) {
     this.romanList.push({ left: s.split(" is ")[0].trim(), right: s.split(" is ")[1].trim() });
@@ -74,8 +77,17 @@ export class QuKuanJi {
   }
 
   public ask(s: string) {
-    if (s.startsWith("how many")) { return this.howMany(s); }
-    // if (s.startsWith("how much")) { return this.howMuch(s); }
+    if (s.startsWith("how many")) {
+      return this.howMany(s);
+    } else if (s.startsWith("how much")) {
+      return this.howMuch(s);
+    } else if (s.includes(this.localCurrency)) {
+      this.trainMineral(s);
+      return "OK.";
+    } else if (s.includes("is")) {
+      this.trainRoman(s);
+      return "OK.";
+    }
     return "I have no idea.";
   }
 }

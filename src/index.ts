@@ -7,9 +7,9 @@ const rl = createInterface({
 });
 rl.setPrompt("Prompt> ");
 rl.prompt();
-
+const ji = new QuKuanJi("Credits")
 rl.on("line", (line) => {
-  const x = new QuKuanJi().ask(line);
+  const x = ji.ask(line);
   console.log(x);
   rl.prompt();
 }).on("close", () => {
