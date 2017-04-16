@@ -9,17 +9,17 @@
 //   Then I should see "I have no idea."
 import { roman2decimal } from "./roman";
 interface INumeralAssignment {
-  left: string;
-  right: string;
+  numeral: string;
+  assignedTo: string;
 }
-interface IMineralValue {
+interface IMineralPrice {
   name: string;
-  value: number;
+  price: number;
 }
 export class QuKuanJi {
   public localCurrency: string;
   private romanList: INumeralAssignment[] = [];
-  private mineralList: IMineralValue[] = [];
+  private mineralList: IMineralPrice[] = [];
 
   constructor(localCurrency: string = "simoleans") {
     this.localCurrency = localCurrency;
@@ -27,34 +27,36 @@ export class QuKuanJi {
 
   public trainRoman(s: string) {
     this.romanList.push({
-      left: this.getLeftOfAssignment(s),
-      right: this.getRightOfAssignment(s),
+      assignedTo: this.leftOfIs(s),
+      numeral: this.rightOfIs(s),
     });
   }
   public trainMineral(s: string) {
-    const left = this.getLeftOfAssignment(s);
-    const right = this.getRightOfAssignment(s);
-    const mineral = this.getLastWord(left);
+    const left = this.leftOfIs(s);
+    const right = this.rightOfIs(s);
     const numericalValue: number = +right.replace(this.localCurrency, "").trim();
+
+    const mineral = this.getLastWord(left);
     const foreignValue = left.replace(mineral, "").trim();
+
     const roman = this.lookupRomanNumerals(foreignValue);
     const arabic = roman2decimal(roman);
-    this.mineralList.push({ name: mineral, value: numericalValue / arabic });
+    this.mineralList.push({ name: mineral, price: numericalValue / arabic });
   }
 
   public whatIs(s: string): string {
-    const a = this.romanList.filter((x) => x.left === s)[0];
-    return a && a.right;
+    const a = this.romanList.filter((x) => x.assignedTo === s)[0];
+    return a && a.numeral;
   }
 
   public whatIsTheUnitValueOf(s: string): number {
     const a = this.mineralList.filter((x) => x.name === s)[0];
-    return a && a.value;
+    return a && a.price;
   }
 
   public howMany(s: string): number {
-    const left = this.getLeftOfAssignment(s);
-    let right = this.getRightOfAssignment(s);
+    const left = this.leftOfIs(s);
+    let right = this.rightOfIs(s);
     right = right.replace("?", "").trim();
     const mineral = this.getLastWord(right);
     right = right.replace(mineral, "").trim();
@@ -63,8 +65,8 @@ export class QuKuanJi {
   }
 
   public howMuch(s: string): number {
-    let right = this.getRightOfAssignment(s);
-    if (!this.romanList.some((x) => right.split(" ").includes(x.left))) {
+    let right = this.rightOfIs(s);
+    if (!this.romanList.some((x) => right.split(" ").includes(x.assignedTo))) {
       return null;
     }
     right = right.substring(0, right.length - 1);
@@ -95,10 +97,10 @@ export class QuKuanJi {
   private getLastWord(s: string): string {
     return s.split(" ")[s.split(" ").length - 1];
   }
-  private getLeftOfAssignment(s: string): string {
+  private leftOfIs(s: string): string {
     return s.split(" is ")[0];
   }
-  private getRightOfAssignment(s: string): string {
+  private rightOfIs(s: string): string {
     return s.split(" is ")[1];
   }
 }
