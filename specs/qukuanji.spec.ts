@@ -1,39 +1,4 @@
-// Feature: Foreign Exchange
-//   As a user of a ForEx machine
-//   I want to inquire about rates
-//   So that I can exchange currencies
-
-// Scenario: Asking a question
-//   Given a question prompt
-//   When I ask a stupid question
-//   Then I should see "I have no idea."
-import { roman2decimal } from "../src/roman";
-class QuKuanJi {
-  // public acceptedCurrency: string = "simoleans";
-  // constructor(public bank: string, public branch: string) {
-  //   this.fullName = firstName + " " + middleInitial + " " + lastName;
-  // }
-  private data = [];
-  public train(s: string) {
-    this.data.push({ left: s.split(" is ")[0].trim(), right: s.split(" is ")[1].trim() });
-  }
-  public whatIs(s: string): string {
-    const a = this.data.filter((x) => x.left === s)[0];
-    return a && a.right;
-  }
-  public howMuch(s: string): number {
-    let right = s.split(" is ")[1];
-    right = right.substring(0, right.length - 1);
-    const roman = right.split(" ")
-      .map((x) => (x && this.whatIs(x)))
-      .toString()
-      .replace(/,/g, "");
-    return roman2decimal(roman);
-  }
-  public ask(s: string) {
-    return "I have no idea.";
-  }
-}
+import { QuKuanJi } from "../src/";
 describe("Given a question prompt", () => {
   const classUnderTest = new QuKuanJi();
   describe("When I ask a stupid question", () => {
@@ -43,10 +8,10 @@ describe("Given a question prompt", () => {
     });
   });
 });
-describe("Given training data", () => {
+describe("Given numeral training data", () => {
   const classUnderTest = new QuKuanJi();
-  classUnderTest.train("a is I");
-  classUnderTest.train("b is V");
+  classUnderTest.trainRoman("a is I");
+  classUnderTest.trainRoman("b is V");
   describe("When I ask what is", () => {
     test("Then is should provide it", () => {
       expect(classUnderTest.whatIs("a")).toEqual("I");
@@ -57,6 +22,27 @@ describe("Given training data", () => {
     test("Then is should provide it", () => {
       expect(classUnderTest.howMuch("how much is a b ?")).toEqual(4);
       expect(classUnderTest.howMuch("how much is b a ?")).toEqual(6);
+    });
+  });
+
+});
+
+describe("Given mineral unit value training data", () => {
+  const classUnderTest = new QuKuanJi();
+  classUnderTest.trainRoman("a is I");
+  classUnderTest.trainRoman("c is X");
+  classUnderTest.trainMineral("a a Silver is 34 simoleans");
+  classUnderTest.trainMineral("c c Iron is 3910 simoleans");
+  describe("When I ask what is", () => {
+    test("Then is should provide it", () => {
+      expect(classUnderTest.whatIsTheUnitValueOf("Silver")).toEqual(17);
+      expect(classUnderTest.whatIsTheUnitValueOf("Iron")).toEqual(195.5);
+    });
+  });
+  describe("When I ask how many", () => {
+    test("Then is should provide it", () => {
+      expect(classUnderTest.howMany("how many simoleans is a a Silver ?")).toEqual(34);
+      expect(classUnderTest.howMany("how many simoleans is a c Silver ?")).toEqual(153);
     });
   });
 });
