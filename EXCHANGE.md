@@ -28,7 +28,6 @@ Numbers are formed by combining symbols together and adding the values. For exam
 Input to your program consists of lines of text detailing your notes on the conversion between intergalactic units and roman numerals.
 
 You are expected to handle invalid queries appropriately.
-glob globc = II = 2 = 
 Test input:
 glob is I
 prok is V
