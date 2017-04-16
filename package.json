@@ -5,12 +5,13 @@
   "license": "MIT",
   "scripts": {
     "prestart": "tsc",
-    "start": "node dist/greeter.js",
+    "start": "node dist/index.js",
     "test": "jest",
     "watch": "jest --watch"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
+    "@types/node": "^7.0.12",
     "jest": "^19.0.2",
     "ts-jest": "^19.0.8",
     "tslint": "^5.1.0",

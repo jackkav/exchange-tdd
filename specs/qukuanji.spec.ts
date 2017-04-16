@@ -1,4 +1,4 @@
-import { QuKuanJi } from "../src/";
+import { QuKuanJi } from "../src/qukuan";
 describe("Given a question prompt", () => {
   const classUnderTest = new QuKuanJi();
   describe("When I ask a stupid question", () => {
@@ -26,7 +26,6 @@ describe("Given numeral training data", () => {
   });
 
 });
-
 describe("Given mineral unit value training data", () => {
   const classUnderTest = new QuKuanJi();
   classUnderTest.trainRoman("a is I");

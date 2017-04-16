@@ -8,6 +8,16 @@ export const guide: object = {
   I: 1,
 };
 
+export enum Guide {
+  M = 1000,
+  D = 500,
+  C = 100,
+  L = 50,
+  X = 10,
+  V = 5,
+  I = 1,
+}
+
 export const order: string[] = ["M", "D", "C", "L", "X", "V", "I"];
 
 export const decimal2roman = (num: number): string => {
@@ -31,22 +41,24 @@ export const roman2decimal = (s: string): number => {
   const charArray: string[] = s.split("");
 
   while (s.length > 0) {
-    const sym1 = s[0];
-
+    const sym1: string = s[0];
+    // const sym1num = +Guide[sym1];
+    const sym1num: Guide = (Guide as any)[sym1];
     s = s.substring(1);
 
     if (s.length > 0) {
-      const sym2 = s[0];
+      const sym2: string = s[0];
+      const sym2num: Guide = (Guide as any)[sym2];
 
       // E.g. "IV"
       if (order.indexOf(sym1) > order.indexOf(sym2)) {
         s = s.substring(1);
-        dec += guide[sym2] - guide[sym1];
+        dec += sym2num - sym1num;
       } else {
-        dec += guide[sym1];
+        dec += sym1num;
       }
     } else {
-      dec += guide[sym1];
+      dec += sym1num;
     }
   }
 
