@@ -36,31 +36,21 @@ export const decimal2roman = (num: number): string => {
 export const roman2decimal = (s: string): number => {
   if (!s) { return 0; }
   s = s.toUpperCase();
-  let dec = 0;
-
+  let total = 0;
   const charArray: string[] = s.split("");
 
-  while (s.length > 0) {
-    const sym1: string = s[0];
-    // const sym1num = +Guide[sym1];
-    const sym1num: Guide = (Guide as any)[sym1];
-    s = s.substring(1);
-
-    if (s.length > 0) {
-      const sym2: string = s[0];
-      const sym2num: Guide = (Guide as any)[sym2];
-
-      // E.g. "IV"
-      if (order.indexOf(sym1) > order.indexOf(sym2)) {
-        s = s.substring(1);
-        dec += sym2num - sym1num;
-      } else {
-        dec += sym1num;
-      }
+  while (charArray.length > 0) {
+    const top: string = charArray.shift();
+    const next: string = charArray[0];
+    const isNextLower: boolean = order.indexOf(top) <= order.indexOf(next);
+    const isLastElement: boolean = charArray.length === 0;
+    if (isLastElement || isNextLower) {
+      total += (Guide as any)[top];
     } else {
-      dec += sym1num;
+      charArray.shift();
+      total += (Guide as any)[next] - (Guide as any)[top];
     }
   }
 
-  return dec;
+  return total;
 };

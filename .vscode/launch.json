@@ -8,10 +8,55 @@
       "type": "node",
       "request": "launch",
       "name": "Jest",
+      "sourceMaps": true,
       "program": "${workspaceRoot}/node_modules/jest-cli/bin/jest.js",
       "args": [
         "--runInBand"
+      ],
+      "outDir": "${workspaceRoot}/dist"
+    },
+    {
+      "name": "Debug Tests",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/jest-cli/bin/jest.js",
+      "stopOnEntry": false,
+      "args": [
+        "--runInBand"
+      ],
+      "cwd": "${workspaceRoot}",
+      "preLaunchTask": "tsc",
+      "runtimeExecutable": null,
+      "runtimeArgs": [
+        "--harmony"
+      ],
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "externalConsole": false,
+      "sourceMaps": true,
+      "outDir": null,
+      "port": 9070
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch",
+      "sourceMaps": true,
+      "stopOnEntry": true,
+      "console": "internalConsole",
+      "cwd": "${workspaceRoot}",
+      "program": "${workspaceRoot}/src/index.ts",
+      "outFiles": [
+        "${workspaceRoot}/dist/*.js"
       ]
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to Process",
+      "port": 5858,
+      "outFiles": []
     }
   ]
 }
